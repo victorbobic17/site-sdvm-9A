@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portul Tradițional și Dansurile Populare – SDVM</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: "Segoe UI", sans-serif;
+            background: #faf7f2;
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        h2 {
+            color: #b30000;
+            font-size: 40px;
+            margin-bottom: 20px;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: 0.8s ease;
+        }
+
+        p {
+            line-height: 1.7;
+            font-size: 20px;
+        }
+
+        header {
+            position: relative;
+            background: url('steag_header.jpg') center/cover no-repeat;
+            color: #ffe6a7;
+            padding: 130px 20px;
+            text-align: center;
+            text-shadow: 0 0 12px rgba(0,0,0,0.7);
+            animation: fadeIn 2s ease forwards;
+        }
+
+        header::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to bottom right, rgba(0,0,0,0.6), rgba(0,0,0,0.3));
+        }
+
+        header .content {
+            position: relative;
+            z-index: 1;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 54px;
+            font-weight: 800;
+        }
+
+        header p {
+            font-size: 24px;
+            margin-top: 12px;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(1.05); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        .motif-bar {
+            width: 100%;
+            background: repeating-linear-gradient(
+                45deg,
+                #b30000 0,
+                #b30000 8px,
+                #faf7f2 8px,
+                #faf7f2 16px,
+                #000 16px,
+                #000 24px,
+                #faf7f2 24px,
+                #faf7f2 32px
+            );
+            height: 26px;
+        }
+
+        nav {
+            background: #fff;
+            padding: 15px;
+            text-align: center;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            transition: 0.3s ease;
+        }
+
+        nav.shrink {
+            padding: 5px;
+            background: #ffe6e6;
+        }
+
+        nav a {
+            margin: 0 20px;
+            text-decoration: none;
+            color: #b30000;
+            font-weight: bold;
+            font-size: 20px;
+            transition: 0.3s ease;
+        }
+
+        nav a:hover {
+            color: #ff0000;
+            text-shadow: 0 0 5px rgba(255,0,0,0.4);
+        }
+
+        section {
+            padding: 60px 20px;
+            max-width: 1100px;
+            margin: auto;
+            opacity: 0;
+            transform: translateY(40px);
+            transition: 1s ease;
+        }
+
+        section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .sub {
+            font-size: 18px;
+            color: #555;
+            margin-top: -10px;
+            margin-bottom: 25px;
+        }
+
+        .two-cols {
+            display: grid;
+            grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+            gap: 30px;
+            align-items: start;
+        }
+
+        .two-cols img {
+            width: 100%;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+        }
+
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .gallery div {
+            background: white;
+            padding: 10px;
+            border-radius: 10px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+            text-align: center;
+            transition: 0.3s ease;
+            cursor: pointer;
+        }
+
+        .gallery div:hover {
+            transform: scale(1.05);
+        }
+
+        .gallery img {
+            width: 100%;
+            height: 190px;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+
+        .caption {
+            font-size: 17px;
+            margin-top: 8px;
+            color: #555;
+        }
+
+        #lightbox {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.85);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 999;
+        }
+
+        #lightbox img {
+            max-width: 90%;
+            max-height: 90%;
+            border-radius: 10px;
+            animation: zoomIn 0.4s ease;
+        }
+
+        @keyframes zoomIn {
+            from { transform: scale(0.7); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+
+        .team {
+            background: #fff3e6;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+        }
+
+        .team h3 {
+            margin-top: 0;
+            color: #b30000;
+            font-size: 26px;
+        }
+
+        .flag {
+            width: 100%;
+            max-width: 320px;
+            display: block;
+            margin: 25px auto 10px;
+            border-radius: 10px;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0); }
+        }
+
+        .tricolor {
+            width: 100%;
+            height: 22px;
+            display: flex;
+        }
+
+        .tricolor div {
+            flex: 1;
+        }
+
+        .blue { background: #002B7F; }
+        .yellow { background: #FCD116; }
+        .red { background: #CE1126; }
+
+        footer {
+            background: #b30000;
+            color: white;
+            text-align: center;
+            padding: 25px;
+            margin-top: 0;
+            font-size: 17px;
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <div class="content">
+        <h1>Portul Tradițional și Dansurile Populare din România</h1>
+        <p>Site realizat de echipa SDVM – Colegiul Tehnic „Petru Maior”, clasa a IX‑a A</p>
+    </div>
+</header>
+
+<div class="motif-bar"></div>
+
+<nav id="navbar">
+    <a href="#origini">Origini</a>
+    <a href="#port">Portul tradițional</a>
+    <a href="#dansuri">Dansuri populare</a>
+    <a href="#galerie">Galerie foto</a>
+    <a href="#echipa">Echipa</a>
+</nav>
+
+<section id="origini">
+    <h2>Originea portului tradițional românesc</h2>
+    <p class="sub">Cum au apărut hainele care spun povești fără cuvinte</p>
+    <div class="two-cols">
+        <div>
+            <p>Portul tradițional românesc este rezultatul a sute de ani de viață la sat, muncă și creativitate.</p>
+            <p>De la daci până azi, hainele au păstrat simplitate în croială și bogăție în detalii.</p>
+            <p>Astăzi îl vedem la festivaluri, nunți și evenimente culturale.</p>
+        </div>
+        <div>
+            <img src="hora_steag.jpg" alt="Hora românească și steagul României">
+        </div>
+    </div>
+</section>
+
+<section id="port">
+    <h2>Portul tradițional – simboluri, culori și identitate</h2>
+    <p class="sub">De ce nu este doar o haină, ci o carte deschisă despre cine suntem</p>
+    <p>Ia românească este cel mai cunoscut element al portului popular, cu simboluri vechi cusute manual.</p>
+    <p>Culorile au semnificații: roșu – energie, negru – pământ, albastru – cer, verde – natură.</p>
+    <p>Astăzi apare în modă, fotografie și spectacole.</p>
+</section>
+
+<section id="dansuri">
+    <h2>Dansurile populare – mișcare, comunitate și bucurie</h2>
+    <p class="sub">Când muzica pornește, tradiția prinde viață</p>
+    <div class="two-cols">
+        <div>
+            <p>Dansurile populare s-au născut din nevoia oamenilor de a fi împreună.</p>
+            <p>Hora este simbolul comunității: un cerc în care toți sunt egali.</p>
+            <p>Călușarii sunt un dans ritualic spectaculos, parte din patrimoniul cultural.</p>
+        </div>
+        <div>
+            <img src="hora_sat.jpg" alt="Hora tradițională într-un sat românesc">
+        </div>
+    </div>
+</section>
+
+<section id="galerie">
+    <h2>Galerie foto – România în culori și motive</h2>
+    <p class="sub">Imagini sugestive</p>
+
+    <div class="gallery">
+        <div>
+            <img src="port_maramures.jpg" alt="Port tradițional din Maramureș">
+            <div class="caption">Port tradițional din Maramureș</div>
+        </div>
+        <div>
+            <img src="port_bucovina.jpg" alt="Port tradițional din Bucovina">
+            <div class="caption">Port tradițional din Bucovina</div>
+        </div>
+        <div>
+            <img src="hora_copii.jpg" alt="Copii jucând hora">
+            <div class="caption">Copii jucând hora</div>
+        </div>
+        <div>
+            <img src="steag_romania.jpg" alt="Steagul României">
+            <div class="caption">Steagul României</div>
+        </div>
+        <div>
+            <img src="festival_folclor.jpg" alt="Festival de folclor">
+            <div class="caption">Festival de folclor</div>
+        </div>
+    </div>
+</section>
+
+<section id="echipa">
+    <h2>Echipa SDVM</h2>
+    <p class="sub">Cine a lucrat la acest site și la documentare</p>
+
+    <div class="team">
+        <h3>Despre noi</h3>
+        <p><strong>Echipă:</strong> SDVM</p>
+        <p><strong>Membri:</strong> Calancea Sebastian, Goia David, Bobic Victor, Boboacă Matei</p>
+        <p><strong>Clasa:</strong> a IX‑a A</p>
+        <p><strong>Liceu:</strong> Colegiul Tehnic „Petru Maior”</p>
+        <p>Am realizat acest site pentru a prezenta tradițiile românești într-un mod modern și atractiv.</p>
+    </div>
+
+    <img class="flag" src="steag_romania_large.jpg" alt="Steagul României">
+</section>
+
+<div class="tricolor">
+    <div class="blue"></div>
+    <div class="yellow"></div>
+    <div class="red"></div>
+</div>
+
+<footer>
+    <p>© 2026 – Site despre portul tradițional și dansurile populare, realizat de echipa SDVM</p>
+</footer>
+
+<div id="lightbox">
+    <img id="lightbox-img" src="">
+</div>
+<script>
+    const sections = document.querySelectorAll("section, h2");
+
+    function reveal() {
+        sections.forEach(sec => {
+            const top = sec.getBoundingClientRect().top;
+            if (top < window.innerHeight - 100) {
+                sec.classList.add("visible");
+            }
+        });
+    }
+
+    window.addEventListener("scroll", reveal);
+    reveal();
+
+    const navbar = document.getElementById("navbar");
+
+    window.addEventListener("scroll", () => {
+        if (window.scrollY > 80) {
+            navbar.classList.add("shrink");
+        } else {
+            navbar.classList.remove("shrink");
+        }
+    });
+
+    const images = document.querySelectorAll(".gallery img");
+    const lightbox = document.getElementById("lightbox");
+    const lightboxImg = document.getElementById("lightbox-img");
+
+    images.forEach(img => {
+        img.addEventListener("click", () => {
+            lightbox.style.display = "flex";
+            lightboxImg.src = img.src;
+        });
+    });
+
+    lightbox.addEventListener("click", () => {
+        lightbox.style.display = "none";
+    });
+</script>
+</body>
+</html>
